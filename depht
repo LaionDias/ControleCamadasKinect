@@ -1,0 +1,26 @@
+package Desafio_2;
+
+import java.awt.Container;
+import javax.swing.JFrame;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectAccess;
+import presentation.impl.KinectMotionCapture.layers.LayerDepth;
+
+public class depth extends Metodo {
+
+    public void Execucao(JFrame frame, Container c) {
+
+        try {
+            depth = new LayerDepth();
+        } catch (Exception e) {
+            System.out.print("Não foi possível inicializar a Layer");
+        }
+        scp.setVisible(true);
+        scp.addLayerShape(depth);
+        scp.setBounds(0, 0, 640, 420);
+        c.add(scp);
+        frame.setSize(KinectAccess.getPrefSize());
+        frame.repaint();
+        frame.setVisible(true);
+
+    }
+}
