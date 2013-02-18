@@ -1,0 +1,225 @@
+package Desafio_2;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import presentation.ALayerShape;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectAccess;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectManager;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectPlayerDepht;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectPlayerRGB;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectPlayerUser;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectRecorder;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectRecorderSeqImagesUser;
+import presentation.impl.KinectMotionCapture.layers.KinectSkeletonLayerBone;
+import presentation.impl.KinectMotionCapture.layers.LayerDepth;
+import presentation.impl.KinectMotionCapture.layers.LayerNightVision;
+import presentation.impl.KinectMotionCapture.layers.LayerRGB;
+import presentation.impl.KinectMotionCapture.layers.LayerSkeletonBone;
+import presentation.impl.KinectMotionCapture.layers.LayerUserRGB;
+import presentation.impl.KinectMotionCapture.layers.ScreenPanel;
+
+public class Desafio_2 {
+
+    //declaro as variáveis
+    public JFrame frame;
+    public JPanel painel;
+    public Container c;
+    public JToolBar ferramenta;
+    public JButton play, pause, stop, rec;
+    public ImageIcon icon1, icon2, icon3, icon4;
+    public JComboBox combo = new JComboBox();
+    //public Metodos m = new Metodos();
+    public static JMenuItem skeleton, nightvision, user, somenteUser, todoRGB, skeleton_user_rgb, skeleton_user;
+    public static ScreenPanel scp = new ScreenPanel();
+    public static ALayerShape rgb = null;
+    public static LayerSkeletonBone skeleto = null;
+    public static LayerNightVision nv;
+    public static LayerDepth depth;
+    public LayerUserRGB userRgb;
+
+    //método para criar o Frame
+    public void Tela() {
+        frame = new JFrame();
+        frame.setSize(KinectAccess.getPrefSize());
+        //frame.setSize(640, 480);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        c = frame.getContentPane();
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    //instancio os componentes
+    public void Componentes() {
+        Tela();
+        ferramenta = new JToolBar();
+        combo = new JComboBox();
+        combo.addItem("");
+        combo.addItem("KMC://User");
+        combo.addItem("KMC://Rgb");
+        combo.addItem("KMC://Skeleton + User");
+        combo.addItem("KMC://Skeleton + User + Rgb");
+        combo.addItem("KMC://Depht");
+        combo.addItem("KMC://Night Vision");
+
+        icon1 = new ImageIcon(getClass().getResource("/fotos/play.png"));
+        icon2 = new ImageIcon(getClass().getResource("/fotos/pause.png"));
+        icon3 = new ImageIcon(getClass().getResource("/fotos/stop.png"));
+        icon4 = new ImageIcon(getClass().getResource("/fotos/record.png"));
+
+        play = new JButton();
+        pause = new JButton();
+        rec = new JButton();
+        stop = new JButton();
+
+        play.setIcon(icon1);
+        pause.setIcon(icon2);
+        stop.setIcon(icon3);
+        rec.setIcon(icon4);
+
+
+
+        play.setBorder(null);
+        play.setBorderPainted(false);
+        play.setContentAreaFilled(false);
+        play.setFocusPainted(false);
+
+        pause.setBorder(null);
+        pause.setBorderPainted(false);
+        pause.setContentAreaFilled(false);
+        pause.setFocusPainted(false);
+
+        stop.setBorder(null);
+        stop.setBorderPainted(false);
+        stop.setContentAreaFilled(false);
+        stop.setFocusPainted(false);
+
+        rec.setBorder(null);
+        rec.setBorderPainted(false);
+        rec.setContentAreaFilled(false);
+        rec.setFocusPainted(false);
+
+
+        ferramenta.setVisible(true);
+        frame.repaint();
+    }
+
+    //posicionando os componentes
+    public void Posicionando() {
+        Componentes();
+        ferramenta.setBounds(0, 440, 640, 40);
+        ferramenta.add(play);
+        ferramenta.addSeparator();
+        ferramenta.add(pause);
+        ferramenta.addSeparator();
+        ferramenta.add(stop);
+        ferramenta.addSeparator();
+        ferramenta.add(rec);
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.addSeparator();
+        ferramenta.add(combo);
+        //ferramenta.setEnabled(false);
+        c.add(ferramenta);
+        frame.repaint();
+    }
+
+    //cria os eventos
+    public void Eventos() {
+        Posicionando();
+        play.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                switch (combo.getSelectedIndex()) {
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Escolha a opção!!!", "Alerta", JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 1:
+                        user rgb = new user();
+                        rgb.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+                    case 2:
+                        rgb todo = new rgb();
+                        todo.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+                    case 3:
+                        skeletonUser sku = new skeletonUser();
+                        sku.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+                    case 4:
+                        skeketonRgb skr = new skeketonRgb();
+                        skr.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+                    case 5:
+                        depth dpt = new depth();
+                        dpt.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+                    case 6:
+                        nightVision ngt = new nightVision();
+                        ngt.Execucao(frame, c);
+                        ferramenta.repaint();
+                        break;
+
+                }
+            }
+        });
+
+        stop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                // JOptionPane.showMessageDialog(null, "Funciona");
+                limparFrame lp = new limparFrame();
+                lp.Execucao(frame, c);
+                ferramenta.repaint();
+                combo.setSelectedIndex(0);
+            }
+        });
+
+        pause.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    pausarShape ps = new pausarShape();
+                    ps.setEstado(true);
+                    ferramenta.repaint();
+                } catch (Exception ex) {
+                }
+            }
+        });
+
+        rec.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+            }
+        });
+
+    }
+
+    //método principal
+    public static void main(String[] args) {
+        Desafio_2 desafio = new Desafio_2();
+        desafio.Eventos();
+        desafio.frame.repaint();
+        desafio.frame.setVisible(true);
+    }
+}
