@@ -1,0 +1,16 @@
+package Desafio_2;
+
+import java.awt.Container;
+import javax.swing.JFrame;
+
+public class limparFrame extends Metodo {
+
+    public void Execucao(JFrame frame, Container c) {
+        scp.removeLayerShape(rgb);
+        scp.removeLayerShape(userRgb);
+        scp.removeLayerShape(skeleto);
+        scp.removeLayerShape(depth);
+        scp.setVisible(false);
+
+    }
+}
