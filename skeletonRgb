@@ -1,0 +1,33 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Desafio_2;
+
+import java.awt.Container;
+import javax.swing.JFrame;
+import presentation.impl.KinectMotionCapture.KinectControl.EBone;
+import presentation.impl.KinectMotionCapture.layers.LayerRGB;
+import presentation.impl.KinectMotionCapture.layers.LayerSkeletonBone;
+
+public class skeketonRgb extends Metodo {
+
+    public void Execucao(JFrame frame, Container c) {
+        System.out.print("Funcionou, entrou no Skeleton + User + Rgb");
+        try {
+            rgb = new LayerRGB();
+            skeleto = new LayerSkeletonBone();
+            skeleto.setVisibleBoneByID(EBone.ALL);
+
+        } catch (Exception e) {
+            System.out.print("Não foi possível iniciar o Layer");
+        }
+        scp.setVisible(true);
+        scp.addLayerShape(rgb);
+        scp.addLayerShape(skeleto);
+        scp.setBounds(0, 0, 640, 420);
+        c.add(scp);
+        frame.repaint();
+        frame.setVisible(true);
+    }
+}
