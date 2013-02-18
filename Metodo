@@ -1,0 +1,26 @@
+package Desafio_2;
+
+import java.awt.Color;
+import java.awt.Container;
+import javax.swing.JFrame;
+import presentation.ALayerShape;
+import presentation.impl.KinectMotionCapture.KinectControl.EBone;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectAccess;
+import presentation.impl.KinectMotionCapture.layers.LayerDepth;
+import presentation.impl.KinectMotionCapture.layers.LayerNightVision;
+import presentation.impl.KinectMotionCapture.layers.LayerRGB;
+import presentation.impl.KinectMotionCapture.layers.LayerSkeletonBone;
+import presentation.impl.KinectMotionCapture.layers.LayerUserRGB;
+import presentation.impl.KinectMotionCapture.layers.ScreenPanel;
+
+public abstract class Metodo {
+
+    public static ScreenPanel scp = new ScreenPanel();
+    public static ALayerShape rgb = null;
+    public static LayerSkeletonBone skeleto = null;
+    public static LayerNightVision nv = null;
+    public static LayerDepth depth = null;
+    public static LayerUserRGB userRgb = null;
+
+    public abstract void Execucao(JFrame frame, Container c);
+}
