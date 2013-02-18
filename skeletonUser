@@ -1,0 +1,31 @@
+package Desafio_2;
+
+import java.awt.Container;
+import javax.swing.JFrame;
+import presentation.impl.KinectMotionCapture.KinectControl.EBone;
+import presentation.impl.KinectMotionCapture.layers.LayerSkeletonBone;
+import presentation.impl.KinectMotionCapture.layers.LayerUserRGB;
+
+public class skeletonUser extends Metodo {
+
+    public void Execucao(JFrame frame, Container c) {
+        System.out.print("Funcionou, entrou no Skeleton + User");
+        try {
+            userRgb = new LayerUserRGB();
+            skeleto = new LayerSkeletonBone();
+            skeleto.setVisibleBoneByID(EBone.ALL);
+
+        } catch (Exception e) {
+            System.out.print("Não foi possível iniciar o Layer");
+        }
+        scp.setVisible(true);
+        scp.removeLayerShape(rgb);
+        scp.addLayerShape(userRgb);
+        scp.addLayerShape(skeleto);
+        scp.setBounds(0, 0, 640, 420);
+        frame.repaint();
+        c.add(scp);
+        frame.setVisible(true);
+
+    }
+}
