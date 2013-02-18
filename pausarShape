@@ -1,0 +1,45 @@
+package Desafio_2;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
+import javax.swing.JOptionPane;
+import presentation.ALayerShape;
+import presentation.APlayer;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectAccess;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectManager;
+import presentation.impl.KinectMotionCapture.KinectControl.KinectRecorderSeqImagesUser;
+
+public class pausarShape extends ALayerShape {
+
+    private int width = KinectAccess.getPrefSize().width;
+    private int height = KinectAccess.getPrefSize().height;
+    private boolean estado;
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public pausarShape() throws Exception {
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (!estado) {
+            g.drawImage(KinectAccess.getImageRGB24(), 0, 0, width, height, null);
+        } else {
+            JOptionPane.showMessageDialog(null, "Pausou");
+        }
+    }
+
+    public String toString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}
