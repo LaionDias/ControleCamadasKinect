@@ -1,0 +1,36 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Desafio_2;
+
+import java.awt.Color;
+import java.awt.Container;
+import javax.swing.JFrame;
+import presentation.impl.KinectMotionCapture.layers.LayerRGB;
+import presentation.impl.KinectMotionCapture.layers.LayerUserRGB;
+
+public class user extends Metodo {
+
+    public void Execucao(JFrame frame, Container c) {
+        System.out.print("Funcionou, entrou no Somente User");
+        scp.setVisible(true);
+        try {
+            userRgb = new LayerUserRGB();
+
+
+        } catch (Exception e) {
+            System.out.print("Não foi possível iniciar o Layer");
+        }
+
+        scp.removeLayerShape(skeleto);
+        scp.removeLayerShape(rgb);
+        scp.removeLayerShape(userRgb);
+        scp.removeLayerShape(depth);
+        scp.addLayerShape(userRgb);
+        scp.setBounds(0, 0, 640, 420);
+        c.add(scp);
+        frame.repaint();
+        frame.setVisible(true);
+    }
+}
