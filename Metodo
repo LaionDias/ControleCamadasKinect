@@ -15,7 +15,7 @@ import presentation.impl.KinectMotionCapture.layers.ScreenPanel;
 
 public abstract class Metodo {
 
-    public static ScreenPanel scp = new ScreenPanel();
+    public static pausarShape scp = new pausarShape();
     public static ALayerShape rgb = null;
     public static LayerSkeletonBone skeleto = null;
     public static LayerNightVision nv = null;
