@@ -43,12 +43,8 @@ public class Desafio_2 {
     public JComboBox combo = new JComboBox();
     //public Metodos m = new Metodos();
     public static JMenuItem skeleton, nightvision, user, somenteUser, todoRGB, skeleton_user_rgb, skeleton_user;
-    public static ScreenPanel scp = new ScreenPanel();
-    public static ALayerShape rgb = null;
-    public static LayerSkeletonBone skeleto = null;
-    public static LayerNightVision nv;
-    public static LayerDepth depth;
-    public LayerUserRGB userRgb;
+    pausarShape scp = new pausarShape();
+    
 
     //método para criar o Frame
     public void Tela() {
@@ -200,8 +196,7 @@ public class Desafio_2 {
         pause.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    pausarShape ps = new pausarShape();
-                    ps.setEstado(true);
+                    scp.estado = true;
                     ferramenta.repaint();
                 } catch (Exception ex) {
                 }
