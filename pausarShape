@@ -13,33 +13,14 @@ import presentation.impl.KinectMotionCapture.KinectControl.KinectAccess;
 import presentation.impl.KinectMotionCapture.KinectControl.KinectManager;
 import presentation.impl.KinectMotionCapture.KinectControl.KinectRecorderSeqImagesUser;
 
-public class pausarShape extends ALayerShape {
+public class pausarShape extends ScreenPanel {
 
-    private int width = KinectAccess.getPrefSize().width;
-    private int height = KinectAccess.getPrefSize().height;
-    private boolean estado;
+   
+    public boolean estado = false;
 
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public pausarShape() throws Exception {
-    }
-
-    @Override
-    public void draw(Graphics g) {
+    public void paint(Graphics g) {
         if (!estado) {
-            g.drawImage(KinectAccess.getImageRGB24(), 0, 0, width, height, null);
-        } else {
-            JOptionPane.showMessageDialog(null, "Pausou");
-        }
-    }
-
-    public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+            super.paint(g);
+        } e
     }
 }
